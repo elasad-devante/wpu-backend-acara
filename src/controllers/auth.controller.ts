@@ -67,6 +67,8 @@ export default {
     },
 
     async login (req: Request, res: Response) {
+
+
         const {identifier, password} = req.body as unknown as TLogin
         try {
             // Ambil data user berdasarkan identifier
@@ -118,6 +120,11 @@ export default {
     },
 
     async me (req: IReqUser, res: Response) {
+        /**
+         #swagger.security = [{
+         "bearerAuth": []
+         }]
+         */
         try {
             const user = req.user;
 
