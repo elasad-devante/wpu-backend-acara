@@ -27,9 +27,35 @@ const doc = {
             LoginRequest: {
                 identifier: "Yuzuha",
                 password: "spookShack123",
+            }, 
+            RequestBody: {
+                fullName: "Ukinami Yuzuha",
+                username: "yuzuha",
+                email: "yuzuha16@yopmail.com",
+                password: "12345SpookShack",
+                confirmPassword: "12345SpookShack"
+            },
+            ActivationRequest: {
+                code: "12345abcdef"
             }
         }
     },
+    paths: {
+        '/auth/activation': {
+            post: {
+                requestBody: {
+                    required: true,
+                    content: {
+                        'application/json': {
+                            schema: {
+                                $ref: '#/components/schemas/ActivationRequest'
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
 const outputFile = "./swagger_output.json";

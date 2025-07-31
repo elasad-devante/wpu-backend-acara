@@ -18,6 +18,9 @@
   "paths": {
     "/auth/register": {
       "post": {
+        "tags": [
+          "Auth"
+        ],
         "description": "",
         "responses": {
           "200": {
@@ -57,6 +60,9 @@
     },
     "/auth/login": {
       "post": {
+        "tags": [
+          "Auth"
+        ],
         "description": "",
         "responses": {
           "200": {
@@ -68,8 +74,8 @@
           "401": {
             "description": "Unauthorized"
           },
-          "404": {
-            "description": "Not Found"
+          "403": {
+            "description": "Forbidden"
           }
         },
         "requestBody": {
@@ -93,6 +99,9 @@
     },
     "/auth/me": {
       "get": {
+        "tags": [
+          "Auth"
+        ],
         "description": "",
         "parameters": [
           {
@@ -120,6 +129,32 @@
           }
         ]
       }
+    },
+    "/auth/activation": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ActivationRequest"
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -133,40 +168,47 @@
       "LoginRequest": {
         "type": "object",
         "properties": {
-          "type": {
+          "identifier": {
             "type": "string",
-            "example": "object"
+            "example": "Yuzuha"
           },
-          "properties": {
-            "type": "object",
-            "properties": {
-              "identifier": {
-                "type": "object",
-                "properties": {
-                  "type": {
-                    "type": "string",
-                    "example": "string"
-                  },
-                  "example": {
-                    "type": "string",
-                    "example": "Yuzuha"
-                  }
-                }
-              },
-              "password": {
-                "type": "object",
-                "properties": {
-                  "type": {
-                    "type": "string",
-                    "example": "string"
-                  },
-                  "example": {
-                    "type": "string",
-                    "example": "spookShack123"
-                  }
-                }
-              }
-            }
+          "password": {
+            "type": "string",
+            "example": "spookShack123"
+          }
+        }
+      },
+      "RequestBody": {
+        "type": "object",
+        "properties": {
+          "fullName": {
+            "type": "string",
+            "example": "Ukinami Yuzuha"
+          },
+          "username": {
+            "type": "string",
+            "example": "yuzuha"
+          },
+          "email": {
+            "type": "string",
+            "example": "yuzuha16@yopmail.com"
+          },
+          "password": {
+            "type": "string",
+            "example": "12345SpookShack"
+          },
+          "confirmPassword": {
+            "type": "string",
+            "example": "12345SpookShack"
+          }
+        }
+      },
+      "ActivationRequest": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "example": "12345abcdef"
           }
         }
       }
